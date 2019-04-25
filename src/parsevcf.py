@@ -1,4 +1,8 @@
 #!/bin/env python3
+import re
+def endInfo(info):
+	return re.search("(END)=(\d+)",info)[2]
+		
 
 class ParseVcf:
 	
@@ -11,6 +15,7 @@ class ParseVcf:
 		self.qual=""
 		self.filter=""	
 		self.info=""
+		self.posend=""
 		self.parse(line)
 	def parse(self,line):
 		try:
@@ -23,8 +28,10 @@ class ParseVcf:
 			self.qual=parseline[5]
 			self.filter=parseline[6]
 			self.info=parseline[7]
-
-		
+			try:
+				self.posend=endInfo(self.info)
+			except:
+				self.posend("None")
 			
 		except:
 			print("Data corrupted")
@@ -32,4 +39,5 @@ class ParseVcf:
 	def iterAttribute(self):
 		return iter(self.__dict__.values())
 
+		
 
