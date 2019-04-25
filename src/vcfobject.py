@@ -10,12 +10,12 @@ ParseVcf=parsevcf.ParseVcf
 ############
 class ObjectVcf:
 	
-	def __init__(self, generation, filename):
+	def __init__(self, generation, path,filename):
 		self.generation=generation
 		self.filename=filename
 		self.header=""
 		self.chromosome=[]
-		self.readFile()
+		self.readFile(path)
 		self.dataframe=""
 
 	##########
@@ -46,9 +46,10 @@ class ObjectVcf:
 	##CLASS METHODS##
 	#################
 
-	def readFile(self):
+	def readFile(self,path):
 		try : 
-			with open(self.filename,"r") as file:
+			with open(path+self.filename,"r") as file:
+
 				chrom=""
 				for line in  file.readlines():
 					info=[]
@@ -56,10 +57,13 @@ class ObjectVcf:
 					if first_char=="#":
 						self.header+=line
 					else:
-						parseline=ParseVcf(line)
-						row=[]
-						[row.append(attribute)for attribute in parseline.iterAttribute()]	
-						self.chromosome.append(row)
+						try : 
+							parseline=ParseVcf(line)
+							row=[]
+							[row.append(attribute)for attribute in parseline.iterAttribute()]	
+							self.chromosome.append(row)
+						except:
+							pass
 		except FileNotFoundError:
 			print("File not found")
 		except ValueError :
@@ -67,13 +71,26 @@ class ObjectVcf:
 			
 
 	def dataConvert(self):
-		self.dataframe=pd.DataFrame.from_records(self.chromosome, columns=["Chrom", "Pos", "Id", "Ref", "Alt", "Qual", "Filter", "Info"])
-	
-	def removeNestTE(self):
-		return False
+		self.dataframe=pd.DataFrame.from_records(self.chromosome, columns=["Chrom", "Pos", "Id", "Ref", "Alt", "Qual", "Filter", "Info", "PosEnd"])
+		self.dataframe.Pos=pd.to_numeric(self.dataframe.Pos)		
+		self.dataframe.PosEnd=pd.to_numeric(self.dataframe.PosEnd)
 
-	def endInfo(self, index):
-		row=self.dataframe.loc[index]
-		print(re.search("(END)=(\d+)", row.Info))	
+
+	def removeNestedTE(self,index,value=0):
+		current_row=self.dataframe.loc[index]
+		previous_row=self.dataframe.loc[index-1]
+			
+		print(current_row.Pos, previous_row.PosEnd)
+		if current_row.Pos<=previous_row.PosEnd:
+			if (previous_row.PosEnd-current_row.Pos)<=value:
+				print("good")
+				pass
+			else:
+				print("pasbon")
+				
+		else:
+			print("largeee")
+			pass
+		
 		
 
