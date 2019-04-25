@@ -1,4 +1,5 @@
 #!/bin/env python3
+import re
 import pandas as pd
 import parsevcf
 
@@ -15,6 +16,7 @@ class ObjectVcf:
 		self.header=""
 		self.chromosome=[]
 		self.readFile()
+		self.dataframe=""
 
 	##########
 	##GETTER##
@@ -65,5 +67,13 @@ class ObjectVcf:
 			
 
 	def dataConvert(self):
-		dataframe=pd.DataFrame.from_records(self.chromosome, columns=["Chrom", "Pos", "Id", "Ref", "Alt", "Qual", "Filter", "Info"])
-		print(dataframe)
+		self.dataframe=pd.DataFrame.from_records(self.chromosome, columns=["Chrom", "Pos", "Id", "Ref", "Alt", "Qual", "Filter", "Info"])
+	
+	def removeNestTE(self):
+		return False
+
+	def endInfo(self, index):
+		row=self.dataframe.loc[index]
+		print(re.search("(END)=(\d+)", row.Info))	
+		
+
