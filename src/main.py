@@ -4,7 +4,28 @@ import parsevcf
 import vcfobject
 import time
 import sys 
+import os
+import argparse
 ObjectVcf=vcfobject.ObjectVcf
 ParseVcf=parsevcf.ParseVcf
-bob=ObjectVcf("0","essais.vcf")
-bob.dataConvert()
+
+###############
+###Arguments###
+###############*
+
+parser = argparse.ArgumentParser(description='TE Gen Tool')
+parser.add_argument('-f','--file',
+                   help='File to process')
+parser.add_argument('-c','--clean', type=int, help='Remove nested TE, with values of nested' )
+parser.add_argument('file')
+
+args = parser.parse_args()
+if args.file:
+	list_objvcf=[]
+	for dir,subdir,files in os.walk(args.file):
+		[list_objvcf.append(ObjectVcf(0, file)) for file in files]
+	for objvcf in list_objvcf:
+		objvcf.dataConvert()
+		print(objvcf.dataframe.columns)
+	objvcf.endInfo(0)
+
