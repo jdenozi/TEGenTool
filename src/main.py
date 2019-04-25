@@ -23,9 +23,11 @@ args = parser.parse_args()
 if args.file:
 	list_objvcf=[]
 	for dir,subdir,files in os.walk(args.file):
-		[list_objvcf.append(ObjectVcf(0, file)) for file in files]
+		[list_objvcf.append(ObjectVcf(0,dir,file)) for file in files]
 	for objvcf in list_objvcf:
 		objvcf.dataConvert()
-		print(objvcf.dataframe.columns)
-	objvcf.endInfo(0)
+		if args.clean:
+			objvcf.removeNestedTE(1,args.clean)
+		if not args.clean:
+			objvcf.removeNestedTE(1)
 
