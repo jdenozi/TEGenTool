@@ -49,7 +49,6 @@ class ObjectVcf:
 	def readFile(self,path):
 		try : 
 			with open(path+self.filename,"r") as file:
-
 				chrom=""
 				for line in  file.readlines():
 					info=[]
@@ -76,21 +75,24 @@ class ObjectVcf:
 		self.dataframe.PosEnd=pd.to_numeric(self.dataframe.PosEnd)
 
 
-	def removeNestedTE(self,index,value=0):
-		current_row=self.dataframe.loc[index]
-		previous_row=self.dataframe.loc[index-1]
+def removeNestedTE(listeobj,value=0):
+	for objvcf in listeobj:
+		objvcf.dataConvert()
+		print(objvcf.dataframe)
+		for index in range(1, len(objvcf.dataframe),1):
+			print(index)
 			
-		print(current_row.Pos, previous_row.PosEnd)
-		if current_row.Pos<=previous_row.PosEnd:
-			if (previous_row.PosEnd-current_row.Pos)<=value:
-				print("good")
-				pass
-			else:
-				print("pasbon")
+			current_row=objvcf.dataframe.loc[index]
+			previous_row=objvcf.dataframe.loc[index-1]
 				
-		else:
-			print("largeee")
-			pass
+			if current_row.Pos<=previous_row.PosEnd:
+				if (previous_row.PosEnd-current_row.Pos)<=value:
+					pass
+				else:
+					objvcf.dataframe.drop(index, inplace=True)
+					
+			else:
+				pass
+			
+			
 		
-		
-
