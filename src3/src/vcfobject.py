@@ -8,6 +8,7 @@ import sys
 import pandas as pd
 from dataframeMethods import NumberTeType
 from dataframeMethods import ETDynamicOverGenerations
+from dataframeMethods import insertionOverGenerations
 from operator import itemgetter
 from heapsort import heapSort
 from nestedte import removeNestedTE
@@ -128,9 +129,10 @@ class ObjectVcf:
 		print(len(listecopy[0]))
 		dataframe=pd.DataFrame(listecopy, columns=columns)
 		print("ok")
-		print(dataframe.head(10))
+		#print(dataframe.head(10))
 		print("Compression: gain de ", len(liste)-len(listecopy))
 		#NumberTeType(dataframe)
 		ETDynamicOverGenerations(dataframe)
+		insertionOverGenerations(dataframe)
 		#webbrowser.open(os.getcwd()+"/webpage/home.html")	
 	
