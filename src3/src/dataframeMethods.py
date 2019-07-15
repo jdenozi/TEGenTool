@@ -16,6 +16,7 @@ def ETDynamicOverGenerations(dataframe):
 	df = pd.Series(Counter(chain(*dataframe["Génération"]))).sort_index().rename_axis('Génération').reset_index(name='values')
 	with open("../webpage/jsonFiles/etDynamicOverGenerations.json","w") as file:
 		file.write("etDynamicOverGenerations='"+df.to_json()+"';")
+
 def insertionOverGenerations(dataframe):
 	for i in dataframe["Génération"]:
 		for j in range(1, len(i),1):

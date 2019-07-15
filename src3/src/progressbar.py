@@ -40,7 +40,6 @@ class ProgressBar:
             visual_bar = (steps_bar - 1) * '=' + '>' + (self.maxbar - steps_bar) * ' '
 
         sys.stdout.write('\r' + self.title + ' [' + visual_bar + '] ' + str(self.perc) + '%')
-        sys.stdout.flush()
 
 
 if __name__ == '__main__':

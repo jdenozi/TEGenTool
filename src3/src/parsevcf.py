@@ -25,8 +25,8 @@ class ParseVcf:
 		self.alt=""
 		self.qual=""
 		self.filter=""	
-		self.mq=""
-		self.dp=""
+		self.mq=[]
+		self.dp=[]
 		self.posend=""
 		self.gen=[]
 		self.gen.append(gen)
@@ -41,8 +41,14 @@ class ParseVcf:
 		for i,j in zip(self.chrom,vcfobject.chrom):
 			if i>j:
 				return False
+		for i,j in zip(self.id,vcfobject.id):
+			if i>j:
+				return False
+
 		if self.pos < vcfobject.pos:
+			
 			return True
+		
 		else:
 			return False
 
@@ -50,7 +56,11 @@ class ParseVcf:
 	def __get__(self,vcfobject):
 		for i,j in zip(self.chrom,vcfobject.chrom):
 			if i<j:
-				return True
+				return False
+		for i,j in zip(self.id,vcfobject.id):
+			if i<j:
+				return False
+
 		if self.pos > vcfobject.pos:
 			return True
 		else:
@@ -62,6 +72,10 @@ class ParseVcf:
 		for i,j in zip(self.chrom, vcfobject.chrom):
 			if i!=j:
 				return False
+		for i,j in zip(self.id,vcfobject.id):
+			if i!=j:
+				return False
+
 		if self.pos == vcfobject.pos:
 			return True
 		else:
@@ -79,27 +93,29 @@ class ParseVcf:
 	#which provide check list 
 	def parse(self,line):
 		try:
-			parseline=line.split("	")
-			self.chrom=parseline[0]
-			self.pos+=int(parseline[1])
-			self.id=parseline[2]
-			self.ref=parseline[3]
-			self.alt=parseline[4]
-			self.qual=parseline[5]
-			self.filter=parseline[6]
-			try:
-				self.mq=mqInfo(parseline[7])
-			except: 
-				self.mq="None"
-			try : 
-				self.dp=dpInfo(parseline[7])
-			except:
-				self.dp="None"
+			if line!="\n" and line!="":
 				
-			try:
-				self.posend=endInfo(parseline[7])
-			except:
-				self.posend="None"
+				parseline=line.split("	")
+				self.chrom=parseline[0]
+				self.pos+=int(parseline[1])
+				self.id=parseline[2]
+				self.ref=parseline[3]
+				self.alt=parseline[4]
+				self.qual=parseline[5]
+				self.filter=parseline[6]
+				try:
+					self.mq.append(mqInfo(parseline[7]))
+				except: 
+					self.mq.append("None")
+				try : 
+					self.dp.append(dpInfo(parseline[7]))
+				except:
+					self.dp.append("None")
+					
+				try:
+					self.posend=endInfo(parseline[7])
+				except:
+					self.posend="None"
 			
 		except:
 			print("Data corrupted")

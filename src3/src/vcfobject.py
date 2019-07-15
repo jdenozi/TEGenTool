@@ -22,8 +22,26 @@ def extensionCheck(filename):
 		if re.search("(.vcf)$",filename)!=None:
 			return True
 		else:
+			sys.stdout.write("\033[1;31m")
+			sys.stdout.write("\n \n FileFormatError: ")
+			sys.stdout.write("\033[0;0m")
+			sys.stdout.write("File extension format isn't correct. \n Example : _1_drosophila_melanogasteri.vcf\n More informations are included in README \n")
+
+			sys.exit()
 			return False
 
+def generationExtractor(file):
+	try:
+		generation=re.findall("_([\d]{0,})_",file)
+		print("generation",generation[0])
+		return generation[0]
+	except TypeError:
+		sys.stdout.write("\033[1;31m")
+		sys.stdout.write("\n \n NameError: ")
+		sys.stdout.write("\033[0;0m")
+	
+		sys.stdout.write("File name format isn't correct. \n Example : _1_drosophila_melanogaster.vcf\n More informations are included in README \n")
+		sys.exit()
 ##################
 #CLASSE OBJECTVCF#
 ##################	
@@ -72,14 +90,16 @@ class ObjectVcf:
 	#Parse each vcf column with parsevcf class 
 	#Concat each Vcf line in one list
 	def readFile(self,path,value):
+		dic_file={}
 		liste=[]
 		columns=["Chrom", "Pos", "Id", "Ref", "Alt", "Qual", "Filter", "MQ","DP", "PosEnd", "Génération"]
 		counter=0
 		for dir, subdir,files in os.walk(path):
-			barre=ProgressBar(len(files),title="Reading files ...")
 			for i in range(0,len(files),1):
-				barre.update()
 				file=files[i]
+				generation=generationExtractor(file)
+				
+				dic_file[generation]=file
 				try : 
 					if extensionCheck(file) is True:
 						with open(path+file,"r") as file:
@@ -90,7 +110,7 @@ class ObjectVcf:
 									self.header+=line
 								else:
 									#try : 
-									parseline=ParseVcf(line,i)
+									parseline=ParseVcf(line,generation)
 									liste.append(parseline)
 					else:				
 						break
@@ -100,25 +120,28 @@ class ObjectVcf:
 				except ValueError :
 					print("Could not convert int to string")
 		print("\nReading files done")
-		listecopy=[]	
 		print("\nNombre d'insertion avant nettoyages des éléments imbriqués",len(liste))
 		liste=removeNestedTE(liste, value)
 		debut=time.time()
+
 		heapSort(liste)
+
+		print(liste[0].pos)
 		fin=time.time()
 		print(fin-debut)
 		
 		print("Nombre d'insertion après nettoyages des éléments imbriqués",len(liste))
-
+		listecopy=[]
 		tmp=liste[0]
 		for i in range(0,len(liste),1):
 			if listecopy:
-				if tmp.chrom==liste[i].chrom and tmp.pos==liste[i].pos:
+				if tmp==liste[i]:
 					tmp.gen.append(liste[i].gen[0])
-					heapSort(tmp.gen)
+					tmp.mq.append(liste[i].mq[0])
+					tmp.dp.append(liste[i].dp[0])	
 				else:
 					info=[]
-					[info.append(j)for j in liste[i].iterAttribute()]
+					[info.append(j)for j in tmp.iterAttribute()]
 					listecopy.append(info)
 					tmp=liste[i]
 			else:
@@ -126,13 +149,11 @@ class ObjectVcf:
 				[info.append(j)for j in liste[i].iterAttribute()]
 				listecopy.append(info)
 				tmp=liste[0]	
-		print(len(listecopy[0]))
 		dataframe=pd.DataFrame(listecopy, columns=columns)
-		print("ok")
-		#print(dataframe.head(10))
 		print("Compression: gain de ", len(liste)-len(listecopy))
-		#NumberTeType(dataframe)
+		NumberTeType(dataframe)
 		ETDynamicOverGenerations(dataframe)
-		insertionOverGenerations(dataframe)
-		#webbrowser.open(os.getcwd()+"/webpage/home.html")	
+		#insertionOverGenerations(dataframe)
+		print(dataframe)
+		#webbrowser.open(os.getcwd()+"/../webpage/mainpage.html")	
 	
