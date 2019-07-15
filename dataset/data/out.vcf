@@ -1,0 +1,40 @@
+##fileformat=VCFv4.2
+##fileDate=20120919
+##source=Tangram
+##ALT=<ID=INS:ME:AL,Description="Insertion of ALU element">
+##ALT=<ID=INS:ME:L1,Description="Insertion of L1 element">
+##ALT=<ID=INS:ME:SV,Description="Insertion of SVA element">
+##ALT=<ID=INS:ME:HE,Description="Insertion of HERV element">
+##INFO=<ID=IMPRECISE,Number=0,Type=Flag,Description="Imprecise structural variation">
+##INFO=<ID=STRAND,Number=1,Type=String,Description="Orientation of the inserted mobile elements. '/' means the strand information is not available">
+##INFO=<ID=CIPOS,Number=2,Type=Integer,Description="Confidence interval around POS for imprecise variants. Only presents if the 'IMPRECISE' flag is set">
+##INFO=<ID=MEILEN,Number=1,Type=Integer,Description="Inserted length of MEI. -1 means the inserted length is not available.">
+##INFO=<ID=FRAG,Number=4,Type=Integer,Description="Detailed information of supporting fragments: 5' read-pair fragments, 3' read-pair fragments,5' split fragments and 3' split fragments">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=AD,Number=1,Type=Integer,Description="Allele Depth, how many reads support this allele">
+##source_20190529.1=vcf-merge(v0.1.14-12-gcdb80b8) name0.vcf.gz name10.vcf.gz
+##sourceFiles_20190529.1=0:name0.vcf.gz,1:name10.vcf.gz
+##INFO=<ID=SF,Number=.,Type=String,Description="Source File (index to sourceFiles, f when filtered)">
+##INFO=<ID=AC,Number=.,Type=Integer,Description="Allele count in genotypes">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12878	name10_NA12878
+0	4	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:PL:DP:GQ:AD	.	1/1:157,12,0 :4:12:0,4
+0	8	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:PL:GQ:DP:AD	.	1/1:157,12,0 :12:4:0,4
+0	12	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:PL:DP:GQ:AD	.	1/1:157,12,0 :4:12:0,4
+0	16	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:AD:GQ:DP:PL	.	1/1:0,4:12:4:157,12,0 
+0	20	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:AD:PL:GQ:DP	.	1/1:0,4:157,12,0 :12:4
+0	24	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:DP:GQ:PL:AD	.	1/1:4:12:157,12,0 :0,4
+0	28	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:PL:DP:GQ:AD	.	1/1:157,12,0 :4:12:0,4
+0	32	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:PL:DP:GQ:AD	.	1/1:157,12,0 :4:12:0,4
+0	36	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:AD:DP:GQ:PL	.	1/1:0,4:4:12:157,12,0 
+0	40	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=1;SOR=1.609	GT:AD:PL:GQ:DP	.	1/1:0,4:157,12,0 :12:4
+0	45	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:AD:PL:DP:GQ	1/1:0,4:157,12,0 :4:12	.
+0	90	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:DP:GQ:PL:AD	1/1:4:12:157,12,0 :0,4	.
+0	135	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:GQ:DP:PL:AD	1/1:12:4:157,12,0 :0,4	.
+0	180	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:DP:GQ:PL:AD	1/1:4:12:157,12,0 :0,4	.
+0	225	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:PL:GQ:DP:AD	1/1:157,12,0 :12:4:0,4	.
+0	270	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:PL:GQ:DP:AD	1/1:157,12,0 :12:4:0,4	.
+0	315	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:AD:PL:GQ:DP	1/1:0,4:157,12,0 :12:4	.
+0	360	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:GQ:DP:PL:AD	1/1:12:4:157,12,0 :0,4	.
+0	405	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:AD:PL:DP:GQ	1/1:0,4:157,12,0 :4:12	.
+0	450	.	A	G	129.03	.	AC=2;AF=1.00;AN=2;DP=4;ExcessHet=3.0103;FS=0.000;MLEAC=2;MLEAF=1.00;MQ=35.36;QD=32.26;SF=0;SOR=1.609	GT:GQ:DP:PL:AD	1/1:12:4:157,12,0 :0,4	.
