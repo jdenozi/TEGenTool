@@ -17,18 +17,15 @@ pip3 install TEGenTool
 
 ## Running TEGenTool
 
-    TEGenTool [-d directory] [-o overlap] [-h help]
+    tegentool [-d directory] [-o overlap] [-h help]
 
-For more information about the various command line options use `tesseract --help` .
+For more information about the various command line options use `tegentool --help` .
 
 
 ## For developers
 Feel free to contribute
 
 ## Support
-
-
-For support, first read the [Wiki](https://github.com/tesseract-ocr/tesseract/wiki), particularly the [FAQ](https://github.com/tesseract-ocr/tesseract/wiki/FAQ) to see if your problem is addressed there. If not, search the [Tesseract user forum](https://groups.google.com/d/forum/tesseract-ocr), the [Tesseract developer forum](https://groups.google.com/d/forum/tesseract-dev) and [past issues](https://github.com/tesseract-ocr/tesseract/issues), and if you still can't find what you need, ask for support in the mailing-lists.
 
 Mailing-lists:
 
