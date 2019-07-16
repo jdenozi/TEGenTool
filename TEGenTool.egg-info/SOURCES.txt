@@ -1,0 +1,7 @@
+README.md
+setup.py
+TEGenTool.egg-info/PKG-INFO
+TEGenTool.egg-info/SOURCES.txt
+TEGenTool.egg-info/dependency_links.txt
+TEGenTool.egg-info/requires.txt
+TEGenTool.egg-info/top_level.txt

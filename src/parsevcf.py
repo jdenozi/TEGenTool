@@ -36,6 +36,7 @@ class ParseVcf:
 	####################
 	#Which allow to compare two ParseVcf Object
 	#using chromosome and position attribute
+	#La surcharge des opérateurs permet de comparer des objets insertions entre eux selon CHROM POS ID
 ####################################	
 	def __lt__(self,vcfobject):
 		for i,j in zip(self.chrom,vcfobject.chrom):

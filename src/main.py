@@ -13,7 +13,7 @@ ParseVcf=parsevcf.ParseVcf
 ###Arguments###
 ###############*
 debut = time.time()
-parser = argparse.ArgumentParser(description='TE Gen Tool')
+parser = argparse.ArgumentParser(description='TE Gen Tool v.1.0 \n is a visualization and data processing tool for transposable elements over generations. It makes it possible to manage the specifics of the transposable elements, like the nested elements. The current versions only handle class 1 elements.')
 parser.add_argument('-d','--directory',help='Directory')
 parser.add_argument('-o','--overlap', type=int, help='Remove nested TE, 20 is hardly recommended' )
 

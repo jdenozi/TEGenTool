@@ -4,6 +4,16 @@ import parsevcf
 import random
 import vcfobject
 from vcfobject import * 
+
+
+
+#################
+###HEAPSORT######
+#################
+
+#Permet de trier la liste des insertions en O(nlog(n)) en temps et O(1) en espace
+#en comparant CHROM POS ID (avec la surcharge des opérateur)
+
 count=0
 sys.setrecursionlimit(100000)
 def heapSort(liste):
@@ -33,14 +43,3 @@ def switch(liste,longueur, i):
 		liste[noeud]=tmp
 		switch(liste,longueur,noeud)
 		count+=1
-'''
-un=time.time()
-liste=[]
-for i in range(0,10000,1):
-	liste.append(random.randint(0,10000))
-
-heapSort(liste)
-print(count)
-deux=time.time()
-print(deux-un)
-'''
